@@ -16,7 +16,7 @@ This demo lets you run all four against a real web server and compare the result
 ## Prerequisites
 
 Make sure you have these tools installed on your machine: Node.js (v14 or later) and npm (comes with Node), Apache JMeter (v5.x) – ensure the `jmeter` command is in your PATH or use the full path to the executable, and k6 – available for Windows, macOS, Linux, and as a Docker image. You can download Node.js from nodejs.org, JMeter from jmeter.apache.org, and k6 from k6.io/docs/getting-started/installation.
-
+```cmd
 npm -v
 node -v
 npm install -g npm@latest (to upgrade)
@@ -24,11 +24,12 @@ npm install -g npm@latest (to upgrade)
 java -version
 winget install Microsoft.OpenJDK.21 (if not installed)
 if you run java -version in a new window and it doesn't work just add it to the path
+
 setx /M PATH "%PATH%;C:\Program Files\Microsoft\jdk-21.0.11.10-hotspot\bin"
 
 winget install --id=DEVCOM.JMeter -e
 winget install k6 --source winget
-
+```
 
 ## Project Structure
 
@@ -59,20 +60,23 @@ Your project folder should look like this:
 The `app/` folder contains the web application – run it with `npm start`. The `jmeter/` folder holds XML test plans, each defining a different load profile. The `k6/` folder holds JavaScript test scripts, each implementing a different load profile using k6's stages API.
 
 ## 1. Set Up and Run the Web Application
-
+```cmd
 npm install
 npm start
 http://localhost:3000
-
+```
 The application serves static pages and three API endpoints: `GET /api/data` (fast JSON response), `GET /api/slow` (waits 2 seconds before responding), and `GET /api/cpu` (performs a CPU‑intensive loop of 10 million iterations). To start the app, open a terminal, navigate to the `app` folder, run `npm install` to install dependencies, then run `npm start`. The app will be available at `http://localhost:3000`. Open this URL in your browser to verify that the homepage and the "Get Data / Slow / CPU" buttons work. Keep this terminal running while you execute the performance tests.
 
 ## 2. Running JMeter Tests
 
-in admin cmd
+**Run these commands in an Administrator Command Prompt:**
+
+```cmd
 set PATH=C:\Windows\System32;%PATH%
 set PATH=C:\Program Files\Microsoft\jdk-21.0.11.10-hotspot\bin;%PATH%
 set JAVA_HOME=C:\Program Files\Microsoft\jdk-21.0.11.10-hotspot
 jmeter -t jmeter/load-test.jmx
+```
 
 The provided JMeter test plans (`.jmx` files) each include a Thread Group with specific user counts, ramp‑up times, and loop counts; HTTP Request Defaults pointing to `localhost:3000`; a Random Controller that distributes requests evenly across the four endpoints (`/`, `/api/data`, `/api/slow`, `/api/cpu`); and View Results Tree and Aggregate Report listeners for debugging and metrics.
 
@@ -81,9 +85,10 @@ The test profiles are as follows: `load-test.jmx` (Load Test) uses 50 threads, 3
 To run JMeter in GUI mode (interactive), execute `jmeter -t jmeter/load-test.jmx` and then click the green Start button. You can open other `.jmx` files via File → Open to switch test types. To run JMeter in non‑GUI mode (command line) with an HTML report, first create a results folder with `mkdir -p results`, then run `jmeter -n -t jmeter/load-test.jmx -l results/load-test.jtl -e -o results/load-test-report`. After execution, open `results/load-test-report/index.html` in a browser to see the dashboard. Repeat for other test plans by changing the input filename and output folder accordingly.
 
 ## 3. Running k6 Tests
-
+```cmd
 cd k6
 k6 run load-test.js
+```
 
 The k6 scripts are written in JavaScript and use a `stages` array to define the load profile. Each script also includes weighted endpoint selection (so `/api/data` is called twice as often as the others) and a small random `sleep()` to simulate user think time.
 
