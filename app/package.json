@@ -1,0 +1,12 @@
+{
+  "name": "performance-demo-app",
+  "version": "1.0.0",
+  "description": "Simple website for performance testing demos",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

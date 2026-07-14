@@ -1,0 +1,61 @@
+# --- Node.js / npm ---
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+*.log
+
+# --- App runtime ---
+app/.env
+app/.env.local
+app/.env.*.local
+
+# --- JMeter ---
+*.jtl
+*.jmx.bak
+*.jmx~
+jmeter.log
+results/
+html-report/
+*.csv
+*.xml.bak
+
+# --- k6 ---
+*.json
+*.html
+k6-results/
+*.out
+
+# --- OS / IDE files ---
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# --- Temporary files ---
+tmp/
+temp/
+*.tmp
+*.temp
+
+# --- Compiled / packaged files ---
+*.zip
+*.tar.gz
+*.msi
+*.exe
+*.dmg
+
+# --- Credentials / secrets ---
+*.pem
+*.key
+*.crt
+*.p12
+*.pfx
+.env
+.env.*
