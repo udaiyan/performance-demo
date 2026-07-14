@@ -33,27 +33,28 @@ winget install k6 --source winget
 ## Project Structure
 
 Your project folder should look like this:
-performance-demo/
-├── README.md <-- this file
-├── app/
-│ ├── server.js # Express server
-│ ├── package.json # Node dependencies
-│ └── public/ # Static files (HTML, CSS, JS)
-│ ├── index.html
-│ ├── about.html
-│ ├── style.css
-│ └── script.js
-├── jmeter/
-│ ├── load-test.jmx # Load test plan
-│ ├── stress-test.jmx # Stress test plan
-│ ├── spike-test.jmx # Spike test plan
-│ └── soak-test.jmx # Soak test plan
-└── k6/
-├── load-test.js # Load test script
-├── stress-test.js # Stress test script
-├── spike-test.js # Spike test script
-└── soak-test.js # Soak test script
 
+```
+├── README.md          <-- this file
+├── app/
+│   ├── server.js      # Express server
+│   ├── package.json   # Node dependencies
+│   └── public/        # Static files (HTML, CSS, JS)
+│       ├── index.html
+│       ├── about.html
+│       ├── style.css
+│       └── script.js
+├── jmeter/
+│   ├── load-test.jmx   # Load test plan
+│   ├── stress-test.jmx # Stress test plan
+│   ├── spike-test.jmx  # Spike test plan
+│   └── soak-test.jmx   # Soak test plan
+└── k6/
+    ├── load-test.js    # Load test script
+    ├── stress-test.js  # Stress test script
+    ├── spike-test.js   # Spike test script
+    └── soak-test.js    # Soak test script
+```
 
 The `app/` folder contains the web application – run it with `npm start`. The `jmeter/` folder holds XML test plans, each defining a different load profile. The `k6/` folder holds JavaScript test scripts, each implementing a different load profile using k6's stages API.
 
